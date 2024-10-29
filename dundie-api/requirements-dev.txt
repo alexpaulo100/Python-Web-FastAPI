@@ -1,0 +1,9 @@
+ipython         # terminal
+ipdb            # debugger
+sdb             # debugger remoto
+pip-tools       # lock de dependencias
+pytest          # execução de testes
+pytest-order    # ordenação de testes
+httpx==0.26.0   # requests async para testes
+ruff            # linter
+
