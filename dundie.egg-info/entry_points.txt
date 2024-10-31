@@ -1,0 +1,2 @@
+[console_scripts]
+dundie = dundie.cli:main

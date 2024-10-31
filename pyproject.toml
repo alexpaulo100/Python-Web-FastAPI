@@ -9,8 +9,9 @@ license = {text = "MIT"}
 dynamic = ["version", "readme", "dependencies"]
 
 [project.urls]
-Homepage = 'https://github.com/rochacbruno/dundie-api'
-Source = 'https://github.com/rochacbruno/dundie-api'
+Homepage = 'https://github.com/alexpaulo100/Python-Web-FastAPI'
+Source = 'https://github.com/alexpaulo100/Python-Web-FastAPI'
+
 
 [project.optional-dependencies]
 dev = [

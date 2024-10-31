@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: dundie
+Version: 1.1.dev30+g99412ec.d20241029
+Summary: Rewards API for Dunder Mifflin
+Author-email: Bruno Rocha <rochacbruno@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/rochacbruno/dundie-api
+Project-URL: Source, https://github.com/rochacbruno/dundie-api
+Requires-Python: >=3.8
+Description-Content-Type: text/x-rst
+Requires-Dist: alembic==1.13.0
+Requires-Dist: anyio==3.7.1
+Requires-Dist: bcrypt==4.0.1
+Requires-Dist: cffi==1.15.1
+Requires-Dist: click==8.1.3
+Requires-Dist: cryptography==42.0.4
+Requires-Dist: dynaconf==3.2.4
+Requires-Dist: ecdsa==0.18.0
+Requires-Dist: exceptiongroup==1.2.0
+Requires-Dist: fastapi
+Requires-Dist: fastapi-pagination
+Requires-Dist: greenlet
+Requires-Dist: h11==0.14.0
+Requires-Dist: idna==3.4
+Requires-Dist: jinja2==3.1.3
+Requires-Dist: mako==1.2.4
+Requires-Dist: markdown-it-py==3.0.0
+Requires-Dist: markupsafe==2.1.1
+Requires-Dist: mdurl==0.1.2
+Requires-Dist: passlib[bcrypt]==1.7.4
+Requires-Dist: psycopg2-binary
+Requires-Dist: pyasn1==0.4.8
+Requires-Dist: pycparser==2.21
+Requires-Dist: pydantic
+Requires-Dist: pygments==2.15.0
+Requires-Dist: python-jose[cryptography]==3.3.0
+Requires-Dist: python-multipart==0.0.7
+Requires-Dist: rich==13.5.3
+Requires-Dist: rsa==4.9
+Requires-Dist: six==1.16.0
+Requires-Dist: sniffio==1.3.0
+Requires-Dist: sqlalchemy==1.4.41
+Requires-Dist: sqlalchemy2-stubs==0.0.2a29
+Requires-Dist: sqlmodel==0.0.8
+Requires-Dist: starlette==0.35.1
+Requires-Dist: typer==0.9.0
+Requires-Dist: typing-extensions==4.8.0
+Requires-Dist: uvicorn
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ipdb; extra == "dev"
+Requires-Dist: ipython; extra == "dev"
+Requires-Dist: pip-tools; extra == "dev"
+Requires-Dist: pyright; extra == "dev"
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+
+# Projeto Dundie API - LINUXtips
+
+Este projeto é parte do treinamento Python Web API da LINUXtips. https://linuxtips.io
+
+Este material serve de apoio para as aulas em video.
+
+O e-book do treinamento pode ser acessado em --> [https://rochacbruno.github.io/dundie-api/](https://rochacbruno.github.io/dundie-api/)
+
+[Bruno Rocha](https://twitter.com/rochacbruno)
