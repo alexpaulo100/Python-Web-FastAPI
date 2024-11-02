@@ -2,7 +2,6 @@
 from typing import Optional
 from sqlmodel import Field, SQLModel # type: ignore
 
-
 class User(SQLModel, table=True):
     """Represents the User Model"""
 
@@ -20,3 +19,16 @@ class User(SQLModel, table=True):
     def superuser(self):
         """"Users belonging to management dept are admins."""
         return self.dept == "management"
+    
+
+     
+    def generate_username(name: str) -> str:
+        """Generate a slug from user.name.
+        "Manoel Santos" -> "manoel-santos"
+        "Maria José" -> "maria-jose"
+        "Antônio Silva" -> "antonio-silva"
+        "Márcio Oliveira" -> "marcio-oliveira"
+        """
+        return name.lower().replace(" ", "-")
+    
+

@@ -6,6 +6,8 @@ from sqlmodel import Session, select
 from .config import settings
 from .db import engine
 from .models import User
+from dundie.models.user import generate_username
+
 
 main = typer.Typer(name="dundie CLI", add_completion=False)
 
