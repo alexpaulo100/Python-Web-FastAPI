@@ -1,11 +1,11 @@
 Metadata-Version: 2.1
 Name: dundie
-Version: 1.1.dev30+g99412ec.d20241029
+Version: 0.1.dev11+g34f2683
 Summary: Rewards API for Dunder Mifflin
 Author-email: Bruno Rocha <rochacbruno@gmail.com>
 License: MIT
-Project-URL: Homepage, https://github.com/rochacbruno/dundie-api
-Project-URL: Source, https://github.com/rochacbruno/dundie-api
+Project-URL: Homepage, https://github.com/alexpaulo100/Python-Web-FastAPI
+Project-URL: Source, https://github.com/alexpaulo100/Python-Web-FastAPI
 Requires-Python: >=3.8
 Description-Content-Type: text/x-rst
 Requires-Dist: alembic==1.13.0
@@ -55,13 +55,3 @@ Requires-Dist: pyright; extra == "dev"
 Requires-Dist: flake8; extra == "dev"
 Requires-Dist: black; extra == "dev"
 Requires-Dist: isort; extra == "dev"
-
-# Projeto Dundie API - LINUXtips
-
-Este projeto é parte do treinamento Python Web API da LINUXtips. https://linuxtips.io
-
-Este material serve de apoio para as aulas em video.
-
-O e-book do treinamento pode ser acessado em --> [https://rochacbruno.github.io/dundie-api/](https://rochacbruno.github.io/dundie-api/)
-
-[Bruno Rocha](https://twitter.com/rochacbruno)
