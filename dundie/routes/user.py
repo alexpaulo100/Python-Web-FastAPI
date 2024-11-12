@@ -18,7 +18,7 @@ async def list_users(*, session: Session = ActiveSession) -> List[UserResponse]:
 
 @router.get("/{username}/", response_model=UserResponse)
 async def get_user_by_username(
-    *, 
+    *,
     session: Session = ActiveSession,
     username: str,
 ):
@@ -30,10 +30,9 @@ async def get_user_by_username(
 
 @router.post("/", response_model=UserResponse, status_code=201)
 async def create_user(*, session: Session = ActiveSession, user: UserRequest):
-    """"Creates a new user."""
+    """ "Creates a new user."""
     db_user = User.from_orm(user)
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
     return db_user
-
