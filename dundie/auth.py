@@ -2,9 +2,9 @@ from datetime import datetime, timedelta
 from functools import partial
 from typing import Optional, Union
 
-from fastapi import HTTPException, Request, status
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import jwt
+from jose import jwt, JWTError
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
@@ -38,10 +38,12 @@ def create_access_token(
 ) -> str:
     """Creates a JWT token"""
     to_encode = data.copy()
-    expires_delta = expires_delta or timedelta(minutes=15)
-    expire = datetime() + expires_delta
+    if expires_delta:
+        expires_delta = datetime() + expires_delta
+    else:
+        expire = datetime() + timedelta(minutes=15)
     to_encode.update({"exp": expire, "scope": scope})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 
@@ -53,7 +55,7 @@ def authenticate_user(
     username: str,
     password: str,
 ) -> Union[User, bool]:
-    """Verifies the user exists and pasword is correct"""
+    """Authenticate the user"""
     user = get_user(username)
     if not user:
         return False
@@ -68,13 +70,24 @@ def get_user(username: str) -> Optional[User]:
         return session.exec(query).first()
 
 
-def get_current_user(token: str, request: Request):
+def get_current_user(
+    token: str = Depends(oauth2_scheme),
+    request: Request = None,
+    fresh=False
+)-> User:
+    """Get current user authenticated"""
     credential_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Coud not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
 
+    if request:
+        if authorization := request.headers.get("authorization"):
+            try:
+                token = authorization.split(" ")[1]
+            except IndexError:
+                raise credential_exception
     try:
         pyload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = pyload.get("sub")
@@ -87,9 +100,22 @@ def get_current_user(token: str, request: Request):
     user = get_user(username=token_data.username)
     if user is None:
         raise credential_exception
+    if fresh and (not pyload["fresh"] and not user.superuser):
+        raise credential_exception
     return user
 
 
-async def validate_token(token: str):
+async def get_current_active_user(
+    current_user: User = Depends (get_current_user),
+) -> User:
+    """Wraps the sinc get_active_user for sync calls"""
+    return current_user
+
+AuthenticatedUser = Depends(get_current_active_user)
+
+
+
+async def validate_token(token: str = Depends(oauth2_scheme)) -> User:
+    """Validates user token"""
     user = get_current_user(token=token)
     return user
