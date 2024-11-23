@@ -1,12 +1,12 @@
 from datetime import timedelta
 
-from fastapi import APIRouter, Depends, HTTPException,  status
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from dundie.auth import (
     RefreshToken,
     Token,
-    User, 
+    User,
     authenticate_user,
     create_access_token,
     get_user,
@@ -23,16 +23,16 @@ router = APIRouter()
 @router.post("/token", response_model=Token)
 async def logint_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
-
 ):
     user = authenticate_user(get_user, form_data.username, form_data.password)
     if not user or not isinstance(user, User):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"}
+            headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
+
 @router.post("/refresh_token", response_model=Token)
 async def refresh_token(form_data: RefreshToken):
     user = await validate_token(token=form_data.refresh_token)
@@ -47,7 +47,7 @@ async def refresh_token(form_data: RefreshToken):
         data={"sub": user.username}, expires_delta=refresh_token_expire
     )
 
-    return{
+    return {
         "acces_token": access_token,
         "refresh_token": refresh_token,
         "token_type": "bearer",

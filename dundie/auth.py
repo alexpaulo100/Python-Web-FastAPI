@@ -71,10 +71,8 @@ def get_user(username: str) -> Optional[User]:
 
 
 def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    request: Request = None,
-    fresh=False
-)-> User:
+    token: str = Depends(oauth2_scheme), request: Request = None, fresh=False
+) -> User:
     """Get current user authenticated"""
     credential_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -106,35 +104,27 @@ def get_current_user(
 
 
 async def get_current_active_user(
-    current_user: User = Depends (get_current_user),
+    current_user: User = Depends(get_current_user),
 ) -> User:
     """Wraps the sinc get_active_user for sync calls"""
     return current_user
+
 
 AuthenticatedUser = Depends(get_current_active_user)
 
 
-
-
-
 async def get_current_super_user(
-    current_user: User = Depends (get_current_user),
+    current_user: User = Depends(get_current_user),
 ) -> User:
     """Wraps the sinc get_active_user for sync calls"""
     if not current_user.superuser:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not a super user"
+            status_code=status.HTTP_403_FORBIDDEN, detail="Not a super user"
         )
     return current_user
 
+
 SuperUser = Depends(get_current_super_user)
-
-
-
-
-
-
 
 
 async def validate_token(token: str = Depends(oauth2_scheme)) -> User:
