@@ -4,7 +4,7 @@ from typing import Optional, Union
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import jwt, JWTError
+from jose import JWTError, jwt
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
