@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from dundie.routes.user import main_router
 
 app = FastAPI(

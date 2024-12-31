@@ -9,11 +9,13 @@ from dundie.config import settings
 from dundie.db import engine
 from dundie.models.user import User
 
-def send_email(email: str, message:str):
+
+def send_email(email: str, message: str):
     if settings.emal.debug_mode is True:
         _send_email_debug(email, message)
     else:
         _send_email_smtp(email, message)
+
 
 def _send_email_debug(email: str, message: str):
     """Mock email sending by printing to a file"""
@@ -21,11 +23,12 @@ def _send_email_debug(email: str, message: str):
         sleep(3)
         f.write(f"---START EMAIL {email} ---\n" f"{message}\n" "---END OF EMAIL ---\n")
 
+
 def _send_email_smtp(email: str, message: str):
     """Connect to SMTP server and send email"""
     with smtplib.SMTP_SSL(
         settings.email.smtp.server, settings.email.smtp_port
-    )as server:
+    ) as server:
         server.login(settings.email.smtp_user, settings.email.smtp_password)
         server.sendmail(
             settings.email.smtp_sender,

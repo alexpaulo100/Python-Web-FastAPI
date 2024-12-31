@@ -1,18 +1,18 @@
 from typing import List
 
-from fastapi import APIRouter, HTTPException, Body, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks, Body, HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, select
 
-from dundie.auth import AuthenticatedUser, SuperUser, CanChangeUserPassword
+from dundie.auth import AuthenticatedUser, CanChangeUserPassword, SuperUser
 from dundie.db import ActiveSession
 from dundie.models.user import (
     User,
+    UserPasswordPatchRequest,
+    UserProfilePatchRequest,
     UserRequest,
     UserResponse,
-    UserProfilePatchRequest,
-    UserPasswordPatchRequest,
 )
-from sqlalchemy.exc import IntegrityError
 from dundie.tasks.user import try_to_send_pwd_reset_email
 
 router = APIRouter()
@@ -94,14 +94,15 @@ async def change_password(
     session.refresh(user)
     return user
 
+
 @router.post("/pwd_reset_token/")
 async def send_password_reset_token(
     *,
-    email:str = Body(embed=True),
+    email: str = Body(embed=True),
     background_tasks: BackgroundTasks,
 ):
     """Sends an email with teh token to reset password."""
     background_tasks.add_tasks(try_to_send_pwd_reset_email, email=email)
-    return{
+    return {
         "message": "If we found a user with that emaiil, we sent a password reset token to it."
     }

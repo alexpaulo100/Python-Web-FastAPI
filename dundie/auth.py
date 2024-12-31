@@ -34,7 +34,7 @@ class TokenData(BaseModel):
 
 
 def create_access_token(
-    data: dict, 
+    data: dict,
     expires_delta: Optional[timedelta] = None,
     scope: str = "access_token",
 ) -> str:

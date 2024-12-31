@@ -2,9 +2,9 @@
 name = "dundie"
 description = "Rewards API for Dunder Mifflin"
 authors = [
-    {name = 'Bruno Rocha', email = 'rochacbruno@gmail.com'},
+    {name = 'Alex Silva', email = 'alex.paulo100@gmail.com'},
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 license = {text = "MIT"}
 dynamic = ["version", "readme", "dependencies"]
 
@@ -71,7 +71,6 @@ target-version = ['py312']
 skip-string-normalization = true
 
 [tool.isort]
-line_length = 100
 known_first_party = 'dundie'
 multi_line_output = 3
 include_trailing_comma = true
@@ -96,3 +95,8 @@ disallow_incomplete_defs = true
 disallow_untyped_decorators = true
 disallow_untyped_calls = true
 disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W"]
+
