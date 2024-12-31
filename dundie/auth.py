@@ -34,9 +34,13 @@ class TokenData(BaseModel):
 
 
 def create_access_token(
-    data: dict, expires_delta: Optional[timedelta], scope: str = "access_token"
+    data: dict, 
+    expires_delta: Optional[timedelta] = None,
+    scope: str = "access_token",
 ) -> str:
-    """Creates a JWT token"""
+    """Creates a JWT token from user data
+    scope: access_token or refresh_token
+    """
     to_encode = data.copy()
     if expires_delta:
         expires_delta = datetime() + expires_delta
