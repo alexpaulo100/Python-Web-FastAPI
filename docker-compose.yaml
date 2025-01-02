@@ -33,3 +33,4 @@ services:
 
 volumes:
   dundie_pg_data:
+  
