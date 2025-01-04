@@ -29,7 +29,7 @@ class User(SQLModel, table=True):
     # Populates a '.incomes' on 'User'
     incomes: Optional[list["Transaction"]] = Relationship(
         back_populates="user",
-        sa_relationship_kwargs={"primaryjoin": "User_id == Transaction.user_id"},
+        sa_relationship_kwargs={"primaryjoin": "User.id == Transaction.user_id"},
     )
     # Populates a '.expenses' on 'User'
     from_user: Optional[list["Transaction"]] = Relationship(

@@ -3,7 +3,7 @@ from rich.console import Console
 from rich.table import Table
 from sqlmodel import Session, select
 
-from dundie.models.user import generate_username
+from dundie.models.user import User
 
 from .config import settings
 from .db import engine
